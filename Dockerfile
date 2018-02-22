@@ -1,27 +1,23 @@
-############################################################
-# Canopy NodeJS Build Image                                #
-############################################################
+FROM phusion/baseimage:0.10.0
+LABEL maintainer="Graham Stewart <graham.stewart@findyourcanopy.com>"
 
-FROM ubuntu:16.04
-MAINTAINER Graham Stewart <graham.stewart@findyourcanopy.com>
-USER root
+RUN	curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+		apt-get install -y nodejs && \
+ 		
+		curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+		echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+		apt-get update && \
+		apt-get install -y yarn && \
 
-ENV LANG C.UTF-8
+		apt-get install -y graphicsmagick && \
 
-RUN set -x && \
-	export DEBIAN_FRONTEND=noninteractive && \
-	apt-get update && \
-	apt-get install -y \
-		git \
-		curl \
-		openssh-client \
-		build-essential \
-		iptables \
-                libltdl7 && \
-	curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
-	apt-get install -y nodejs && \
-        curl -s https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_17.12.0~ce-0~ubuntu_amd64.deb -o docker.deb && \
-        dpkg -i docker.deb && \
-	apt-get purge -y curl && \
-	apt-get clean && \
-	rm -rf /var/lib/apt/lists
+		npm install -g nodemon@1.10.2 && \
+		npm install -g apidoc@0.16.1 && \
+		
+		mkdir -p /opt/app && \
+		apt-get clean && \
+		rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV PATH /opt/app/node_modules/.bin:$PATH
+CMD ["/sbin/my_init"]
+
