@@ -11,7 +11,7 @@ RUN chmod +x /usr/bin/ecs-deploy
 RUN apt-get install sudo
 RUN pip install -U setuptools
 RUN pip install --upgrade awscli
-RUN gem install fastlane
+RUN sudo gem install fastlane -NV
 RUN apt-get purge -y build-essential
 RUN rm -f /etc/service/sshd/down
 RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
