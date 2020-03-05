@@ -8,7 +8,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs git openssh-client openjdk-8-jdk-headless python-pip python-dev build-essential docker-ce ruby-dev unzip jq rpl bzip2 --no-install-recommends
 RUN curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | tee /usr/bin/ecs-deploy 
 RUN chmod +x /usr/bin/ecs-deploy
-RUN apt-get install sudo
+RUN curl -sL firebase.tools | bash
 RUN pip install -U setuptools
 RUN pip install --upgrade awscli
 RUN sudo gem install fastlane -NV
