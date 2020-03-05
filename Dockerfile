@@ -5,9 +5,13 @@ RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubunt
 RUN apt-get update 
 RUN apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - 
-RUN apt-get install -y nodejs git openssh-client openjdk-8-jdk-headless python-pip python-dev build-essential docker-ce ruby-dev unzip jq rpl bzip2 --no-install-recommends
+RUN apt-get install -y nodejs git openssh-client openjdk-8-jdk-headless python-pip python-dev build-essential docker-ce unzip jq rpl bzip2 --no-install-recommends
 RUN curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | tee /usr/bin/ecs-deploy 
 RUN chmod +x /usr/bin/ecs-deploy
+RUN curl -sSL https://get.rvm.io | bash -s stable
+RUN rvm install 2.7
+RUN rvm use 2.7
+RUN ruby --version
 RUN curl -sL firebase.tools | bash
 RUN pip install -U setuptools
 RUN pip install --upgrade awscli
