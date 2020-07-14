@@ -4,7 +4,7 @@ LABEL maintainer="Graham Stewart <graham.stewart@findyourcanopy.com>"
 RUN	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - 
 RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - 
 RUN apt-get install -y nodejs git openssh-client openjdk-8-jdk-headless python-pip python-dev build-essential docker-ce ruby-dev unzip jq rpl bzip2 --no-install-recommends
 RUN curl https://raw.githubusercontent.com/silinternational/ecs-deploy/master/ecs-deploy | tee /usr/bin/ecs-deploy 
 RUN chmod +x /usr/bin/ecs-deploy
